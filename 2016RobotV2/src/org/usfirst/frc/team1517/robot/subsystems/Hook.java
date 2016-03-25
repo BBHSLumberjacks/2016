@@ -20,7 +20,7 @@ public class Hook extends Subsystem {
 
     public Hook() {
         super();
-        motor = new Victor(9);
+        motor = new Victor(3);
        
 
 		// Let's show everything on the LiveWindow
@@ -35,14 +35,15 @@ public class Hook extends Subsystem {
      * up
      */
     public void up() {
-        motor.set(-0.5);
+        motor.set(-1);
+        
     }
 
     /**
      * down
      */
     public void down() {
-        motor.set(0.5);
+        motor.set(1);
     }
     
     /**

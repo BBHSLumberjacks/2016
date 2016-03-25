@@ -11,6 +11,7 @@ public class KickerGroup extends CommandGroup {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
+       
        addSequential(new ShooterKick()); 
        addSequential(new ShooterTakeBack());
        

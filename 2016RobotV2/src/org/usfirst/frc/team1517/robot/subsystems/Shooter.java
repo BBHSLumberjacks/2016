@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -32,8 +33,8 @@ public class Shooter extends Subsystem {
      
     public Shooter() {
         super();
-        motor = new Talon(3);
-        shoot_encoder = new Encoder(4,5); 
+        motor = new TalonSRX(1);
+        shoot_encoder = new Encoder(8,9); 
         
         
         if (Robot.isReal()) {
@@ -55,7 +56,8 @@ public class Shooter extends Subsystem {
     	setDefaultCommand(new ShooterShoot());
     }
     public void log() {
-    	SmartDashboard.putNumber("Shooter Speed", shoot_encoder.getRate());
+    	SmartDashboard.putNumber("Shooter Speed", 0 - shoot_encoder.getRate());
+    	
     }
     
     
@@ -81,11 +83,26 @@ public class Shooter extends Subsystem {
 //        motor.set(-scoreStick.getRawAxis(2));
 //    }
 //    
+    public void up() {
+       	motor.set(1);
+}
     /**
      * dont move 
      */
     public void stop() {
         motor.set(0);
     }
- 
+    public void speedController(double targetRate){
+		 double ShootorRate = 0-shoot_encoder.getRate(); 
+			
+			if(ShootorRate < targetRate){
+				motor.set(1);
+			}
+			else{
+				motor.set(.3);
+			}	  
+	  }  
+	  public void autoUp(){
+		  speedController(63); 
+	  }
 }

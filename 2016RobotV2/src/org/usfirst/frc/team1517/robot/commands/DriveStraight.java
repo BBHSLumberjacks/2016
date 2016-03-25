@@ -41,7 +41,7 @@ public class DriveStraight extends Command {
                     }
                 },
                 new PIDOutput() { public void pidWrite(double d) {
-                    Robot.drivetrain.drive(d, d);
+                    Robot.drivetrain.drive(d, -d);
                 }});
         pid.setAbsoluteTolerance(0.01);
         pid.setSetpoint(distance);

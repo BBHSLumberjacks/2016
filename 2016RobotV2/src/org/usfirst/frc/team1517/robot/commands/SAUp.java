@@ -14,7 +14,7 @@ public class SAUp extends Command {
     
     public SAUp() {
         requires(Robot.SA);
-        setTimeout(1);
+        
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class SAUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return Robot.SA.isGrabbing();
     }
 
     // Called once after isFinished returns true

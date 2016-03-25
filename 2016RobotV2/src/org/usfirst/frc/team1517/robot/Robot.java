@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1517.robot.commands.Autonomous;
+// import org.usfirst.frc.team1517.robot.subsystems.Drive;
 import org.usfirst.frc.team1517.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1517.robot.subsystems.Hook;
 import org.usfirst.frc.team1517.robot.subsystems.Kicker;
@@ -21,6 +22,7 @@ import org.usfirst.frc.team1517.robot.subsystems.Rollbar;
 import org.usfirst.frc.team1517.robot.subsystems.RollbarActuator;
 import org.usfirst.frc.team1517.robot.subsystems.ShootActuator;
 import org.usfirst.frc.team1517.robot.subsystems.Shooter;
+import org.usfirst.frc.team1517.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -38,8 +40,9 @@ public class Robot extends IterativeRobot {
     public static ShootActuator SA;
     public static Shooter shooter;
     public static Kicker kick; 
+   // public static Drive drive; 
     public static OI oi;
-
+    public static Vision vision; 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -53,11 +56,15 @@ public class Robot extends IterativeRobot {
         SA = new ShootActuator();
         shooter = new Shooter(); 
         kick = new Kicker(); 
+       // drive = new Drive();
         oi = new OI();
+        vision = new Vision(); 
         CameraServer server = CameraServer.getInstance(); 
         server.setQuality(50); 
         server.startAutomaticCapture("cam0");
-        
+        CameraServer server1 = CameraServer.getInstance(); 
+        server1.setQuality(50); 
+        server1.startAutomaticCapture("cam1");
         // command used for the autonomous period
         autonomousCommand = new Autonomous();
 
@@ -69,6 +76,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(SA);
         SmartDashboard.putData(shooter);
         SmartDashboard.putData(kick);
+        SmartDashboard.putData(vision);
+        
     }
 
     public void autonomousInit() {
@@ -114,5 +123,6 @@ public class Robot extends IterativeRobot {
         SA.log();
         shooter.log();
         kick.log(); 
+        vision.log();
     }
 }

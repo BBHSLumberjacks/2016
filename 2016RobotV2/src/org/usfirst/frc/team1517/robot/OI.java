@@ -32,6 +32,7 @@ public class OI {
         JoystickButton l1 = new JoystickButton(joy, 11);
         JoystickButton r1 = new JoystickButton(joy, 12);
         JoystickButton a = new JoystickButton(ScoreStick, 1);
+        JoystickButton b = new JoystickButton(ScoreStick, 2);
         JoystickButton y = new JoystickButton(ScoreStick, 4);
         JoystickButton c = new JoystickButton(ScoreStick, 5);
         JoystickButton d = new JoystickButton(ScoreStick, 6);
@@ -40,7 +41,7 @@ public class OI {
         //d_down.whenPressed(new ShooterTakein());
         d_right.whenPressed(new Hook());
         d_left.whenPressed(new HookUp());
-        
+        b.whenPressed(new AutoUp());
         r1.whenPressed(new RAUp());
         r2.whenPressed(new RADown());
         l1.whenPressed(new RollbarShoot());
@@ -48,6 +49,7 @@ public class OI {
         a.whenPressed(new KickerGroup());
         c.whenPressed(new HookUp());
         d.whenPressed(new Hook());
+        
         
     }
   // Create methods which will let the JoySticks to be used in 

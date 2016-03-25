@@ -16,7 +16,7 @@ public class Kicker extends Subsystem {
 	
 	public Kicker (){
 		 super();
-		 servo = new Servo(1); 
+		 servo = new Servo(5); 
 		 
 	}
 	
@@ -27,11 +27,11 @@ public class Kicker extends Subsystem {
     public void log() {}
     //set Servo to 75 degrees
     public void kick() {
-       	servo.set(0.0); 
+       	servo.set(0.3); 
 }
     // move Servo to the original position 
     public void takeBack() {
-       	servo.set(0.8);
+       	servo.set(0.7);
        	
 }
 }

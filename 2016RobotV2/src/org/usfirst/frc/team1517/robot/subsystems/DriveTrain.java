@@ -19,15 +19,14 @@ import org.usfirst.frc.team1517.robot.commands.TankDriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The DriveTrain subsystem incorporates the sensors and actuators attached to
- * the robots chassis. These include four drive motors, a left and right encoder
- * and a gyro.
+ *
  */
 public class DriveTrain extends Subsystem {
 	private SpeedController front_left_motor, back_left_motor,
 							front_right_motor, back_right_motor;
 	private RobotDrive drive;
-	private Encoder left_encoder, right_encoder;
+	public Encoder left_encoder;
+	private Encoder right_encoder;
 	private AnalogInput rangefinder;
 	private AnalogGyro gyro;
 
@@ -47,7 +46,7 @@ public class DriveTrain extends Subsystem {
 			left_encoder.setDistancePerPulse(0.042);
 			right_encoder.setDistancePerPulse(0.042);
 		} else {
-			// Circumference in ft = 4in/12(in/ft)*PI
+			
 			left_encoder.setDistancePerPulse((3.5/12.0*Math.PI) / 250.0);
 			right_encoder.setDistancePerPulse((3.5/12.0*Math.PI) / 250.0);
 		}
@@ -72,6 +71,7 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void initDefaultCommand() {
 		setDefaultCommand(new TankDriveWithJoystick());
+		
 	}
 
 	/**
@@ -87,11 +87,10 @@ public class DriveTrain extends Subsystem {
 
 	/**
 	 * Tank style driving for the DriveTrain.
-	 * @param left Speed in range [-1,1]
-	 * @param right Speed in range [-1,1]
 	 */
 	public void drive(double left, double right) {
 		drive.tankDrive(left, right);
+		//drive.tankDrive(left, right, true);
 	}
 
 	/**
@@ -100,28 +99,13 @@ public class DriveTrain extends Subsystem {
 	public void drive(Joystick joy) {
 	//2,3 
 		//4,5 
-		double x = -joy.getRawAxis(1); 
+		double x = joy.getRawAxis(1); 
 		double y = joy.getRawAxis(5); 
-		double a = .5; // a cannot be greater then one 
+		double a = .7; // a cannot be greater then one 
 		drive(a*(x*x*x) + x*(1-a), a*(y*y*y) + (1-a)*y);
-//		if (joy.getRawAxis(2) > 0 && joy.getRawAxis(3) > 0 &&
-//				joy.getRawButton(4) == true && joy.getRawButton(5) == true) {
-//			drive(joy.getRawAxis(1), -joy.getRawAxis(5));
-//		}
-//		if (joy.getRawAxis(2) > 0 && joy.getRawAxis(3) > 0 && joy.getRawButton(4) == true) {
-//			drive(joy.getRawAxis(1), joy.getRawAxis(5));
-//			
-//		} if (joy.getRawAxis(2) > 0 && joy.getRawAxis(3) > 0 && joy.getRawButton(5) == true){
-//			drive(-joy.getRawAxis(1), -joy.getRawAxis(5));
-//			
-//		} if (joy.getRawAxis(2) > 0 && joy.getRawAxis(3) > 0) {
-//			drive(-joy.getRawAxis(1), joy.getRawAxis(5));
-//		}
-//		
-//		if (joy.getRawAxis(2) > 0 && joy.getRawAxis(3) > 0) {
-//			drive(-joy.getRawAxis(1), joy.getRawAxis(5));
-//		}
-//	
+			//2,3 
+				//4,5
+			
 		
 	}
 	
@@ -164,7 +148,20 @@ public class DriveTrain extends Subsystem {
 	 * @return The distance to the obstacle detected by the rangefinder.
 	 */
 	public double getDistanceToObstacle() {
-		// Really meters in simulation since it's a rangefinder...
+		
 		return rangefinder.getAverageVoltage();
+	}
+	/**
+	 * @return The encoder getting the distance and speed of left side of the drivetrain.
+	 */
+	public Encoder getLeftEncoder() {
+		return left_encoder;
+	}
+
+	/**
+	 * @return The encoder getting the distance and speed of right side of the drivetrain.
+	 */
+	public Encoder getRightEncoder() {
+		return right_encoder;
 	}
 }

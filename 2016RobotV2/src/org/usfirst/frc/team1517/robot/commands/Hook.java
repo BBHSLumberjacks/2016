@@ -14,7 +14,7 @@ public class Hook extends Command {
     
     public Hook() {
         requires(Robot.hook);
-        setTimeout(.05);
+        setTimeout(.2);
     }
 
     // Called just before this Command runs the first time
